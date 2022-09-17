@@ -39,8 +39,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         PC = GameObject.Find("Player").GetComponent<PlayerController>();
         SMGems = GameObject.Find("SpawnManagerGems").GetComponent<SpawnManager>();
         SMO2 = GameObject.Find("SpawnManagerO2").GetComponent<SpawnManager>();
-        SMAsteroids = GameObject.Find("SpawnManagerAsteroids").GetComponent<SpawnManager>();
-        ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.Name;
+        SMAsteroids = GameObject.Find("SpawnManagerAsteroids").GetComponent<SpawnManager>();        
         MaxServerPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         AS = GetComponent<AudioSource>();
         isGameActive = false;
@@ -50,13 +49,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        PlayerAmounText.text = "Players:\n" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-        for (int i = 0; i < MaxServerPlayer; i++)
-        {
-            Photon.Realtime.Player temp = PhotonNetwork.CurrentRoom.GetPlayer(i);         
-        }
-        
-        if(isGameActive)
+        PlayerAmounText.text = "Players:\n" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + MaxServerPlayer;
+        ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.Name;
+
+        if (isGameActive)
         {           
             if (!AS.isPlaying && !isGameOver)
             {

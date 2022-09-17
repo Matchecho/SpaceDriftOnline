@@ -112,6 +112,9 @@ public class PlayerController : MonoBehaviour
                 GM.DepleteOxygen();
                 Destroy(collision.gameObject);
                 break;
+            case "Player":
+                
+                break;
             default:
                 break;
         }

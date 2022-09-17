@@ -17,11 +17,16 @@ public class CreateOrJoinSever : MonoBehaviourPunCallbacks
 
     public void JoinServer()
     {
-        PhotonNetwork.CreateRoom(createInput.text);
+        PhotonNetwork.JoinRoom(joinInput.text);
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("SpaceDrift"); 
+        PhotonNetwork.LoadLevel("SpaceDrift");
+        DontDestroyOnLoad(this);
     }
+
+    
 }
+
+

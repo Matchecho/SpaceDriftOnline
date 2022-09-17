@@ -9,8 +9,7 @@ public class SpawnPlayers : MonoBehaviour
     public Vector2 SpawnPosition;
     private void Start()
     {                       
-        SpawnPosition = new Vector2(SpawnPosition.x, SpawnPosition.y - 1.0f);        
+        SpawnPosition = new Vector2(SpawnPosition.x, SpawnPosition.y * 1.0f);        
         PhotonNetwork.Instantiate(playerPrefab.name, SpawnPosition, Quaternion.identity);
-        SpawnPosition = new Vector2(SpawnPosition.x, SpawnPosition.y - 1.0f);
     }
 }

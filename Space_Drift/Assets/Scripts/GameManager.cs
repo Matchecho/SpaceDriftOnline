@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private SpawnManager SMGems;
     private SpawnManager SMO2;
     private SpawnManager SMAsteroids;
-    private PlayerController PC;
+    private PlayerController[] PC = new PlayerController[10];
     private AudioSource AS;
     private int GemStonesScore = 0;
     private float O2 = 100.0f;
@@ -36,11 +36,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        PC = GameObject.Find("Player").GetComponent<PlayerController>();
+        
         SMGems = GameObject.Find("SpawnManagerGems").GetComponent<SpawnManager>();
         SMO2 = GameObject.Find("SpawnManagerO2").GetComponent<SpawnManager>();
         SMAsteroids = GameObject.Find("SpawnManagerAsteroids").GetComponent<SpawnManager>();        
-        MaxServerPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         AS = GetComponent<AudioSource>();
         isGameActive = false;
         AS.PlayOneShot(Theme);
@@ -49,7 +48,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        PlayerAmounText.text = "Players:\n" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + MaxServerPlayer;
+        for (int i = 0; i < PC.Length; i++)
+        {
+            PC[i] = GameObject.Find("Player(Clone)").GetComponent<PlayerController>();
+        }
+
+        PlayerAmounText.text = "Players:\n" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
         ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.Name;
 
         if (isGameActive)
@@ -122,7 +126,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         GemText.text = GemStonesScore.ToString();
         O2_text.text = O2.ToString();
         GemsCollectedText.text = "Gems Collected: " + GemStonesScore.ToString();
-        PC.Restart();
+        for (int i = 0; i < PC.Length; i++)
+        {
+            PC[i].Restart();
+        }
         SMO2.Spawnning();
         SMGems.Spawnning();
         SMAsteroids.Spawnning();

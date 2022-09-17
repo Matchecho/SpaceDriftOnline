@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource AS;
     private Rigidbody2D Rb;
     private PhotonView view;
+    private EventTrigger ET;
     private bool isPressed = false;
     
     // Start is called before the first frame update
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         if (view.IsMine)
         {
+            
             if (isPressed)
             {
                 Rb.AddForce(Vector2.up * JumpForce * Time.deltaTime, ForceMode2D.Impulse);
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
             {
                 Rb.Sleep();
             }
-        }       
+        }              
     }
 
     public void Touch(BaseEventData x)
@@ -69,56 +71,56 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (view.IsMine)
+       
+        switch (collision.gameObject.tag)
         {
-            switch (collision.gameObject.tag)
-            {
-                case "Limit":
-                    GM.GameOver();
-                    gameObject.SetActive(false);
-                    break;
-                case "RedGem":
-                    GM.Collect(1);
-                    Destroy(collision.gameObject);
-                    break;
-                case "OrgGem":
-                    GM.Collect(2);
-                    Destroy(collision.gameObject);
-                    break;
-                case "YlwGem":
-                    GM.Collect(5);
-                    Destroy(collision.gameObject);
-                    break;
-                case "GrnGem":
-                    GM.Collect(8);
-                    Destroy(collision.gameObject);
-                    break;
-                case "BluGem":
-                    GM.Collect(10);
-                    Destroy(collision.gameObject);
-                    break;
-                case "PrlGem":
-                    GM.Collect(12);
-                    Destroy(collision.gameObject);
-                    break;
-                case "PnkGem":
-                    GM.Collect(15);
-                    Destroy(collision.gameObject);
-                    break;
-                case "O2":
-                    GM.AddOxygen();
-                    Destroy(collision.gameObject);
-                    break;
-                case "Asteroid":
-                    GM.DepleteOxygen();
-                    Destroy(collision.gameObject);
-                    break;
-                case "Player":
-                    break;
-                default:
-                    break;
-            }
-
+            case "Limit":                
+                GM.GameOver();
+                gameObject.SetActive(false);
+                break;
+            case "RedGem":
+                GM.Collect(1);
+                Destroy(collision.gameObject);
+                break;
+            case "OrgGem":
+                GM.Collect(2);
+                Destroy(collision.gameObject);
+                break;
+            case "YlwGem":
+                GM.Collect(5);
+                Destroy(collision.gameObject);
+                break;
+            case "GrnGem":
+                GM.Collect(8);
+                Destroy(collision.gameObject);
+                break;
+            case "BluGem":
+                GM.Collect(10);
+                Destroy(collision.gameObject);
+                break;
+            case "PrlGem":
+                GM.Collect(12);
+                Destroy(collision.gameObject);
+                break;
+            case "PnkGem":
+                GM.Collect(15);
+                Destroy(collision.gameObject);
+                break;
+            case "O2":
+                GM.AddOxygen();
+                Destroy(collision.gameObject);
+                break;
+            case "Asteroid":
+                GM.DepleteOxygen();
+                Destroy(collision.gameObject);
+                break;
+            case "Player":
+                
+                break;
+            default:
+                break;
         }
+        
+
     }
 }

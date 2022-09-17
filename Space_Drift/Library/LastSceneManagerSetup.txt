@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/LoadingConnection.unity
+- path: Assets/Scenes/SpaceDrift.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
 
     public TextMeshProUGUI O2_text;
     public TextMeshProUGUI GemText;
     public TextMeshProUGUI GemsCollectedText;
+    public TextMeshProUGUI ServerNameText;
+    public TextMeshProUGUI PlayerAmounText;
     public AudioClip Theme;
     public AudioClip CollectGem;
     public AudioClip CollectO2;
@@ -36,6 +39,8 @@ public class GameManager : MonoBehaviour
         SMGems = GameObject.Find("SpawnManagerGems").GetComponent<SpawnManager>();
         SMO2 = GameObject.Find("SpawnManagerO2").GetComponent<SpawnManager>();
         SMAsteroids = GameObject.Find("SpawnManagerAsteroids").GetComponent<SpawnManager>();
+        ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.Name;
+        
         AS = GetComponent<AudioSource>();
         isGameActive = false;
         AS.PlayOneShot(Theme);
@@ -46,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if(isGameActive)
         {
+            ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
             if (!AS.isPlaying && !isGameOver)
             {
                 AS.PlayOneShot(Theme);

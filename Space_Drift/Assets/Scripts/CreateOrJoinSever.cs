@@ -22,8 +22,7 @@ public class CreateOrJoinSever : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("SpaceDrift");
-        DontDestroyOnLoad(this);
+        PhotonNetwork.LoadLevel("SpaceDrift");        
     }
 
     

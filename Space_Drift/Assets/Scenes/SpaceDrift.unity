@@ -2668,7 +2668,7 @@ MonoBehaviour:
   GemText: {fileID: 1990801287}
   GemsCollectedText: {fileID: 1732541271}
   ServerNameText: {fileID: 282586837}
-  PlayerAmounText: {fileID: 0}
+  PlayerAmounText: {fileID: 1802889372}
   Theme: {fileID: 8300000, guid: fdd67134ab0b24f4c958fc39395cc54d, type: 3}
   CollectGem: {fileID: 8300000, guid: f52d1da083da21f4c8cf55c86631cd88, type: 3}
   CollectO2: {fileID: 8300000, guid: 568b9ac5b1e6489438d3de9762664271, type: 3}
@@ -6806,7 +6806,7 @@ GameObject:
   - component: {fileID: 1802889373}
   - component: {fileID: 1802889372}
   m_Layer: 5
-  m_Name: ServerInfo (1)
+  m_Name: PlayerCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

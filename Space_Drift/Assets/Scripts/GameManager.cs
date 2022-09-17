@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private AudioSource AS;
     private int GemStonesScore = 0;
     private float O2 = 100.0f;
+    private int MaxServerPlayer;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         SMO2 = GameObject.Find("SpawnManagerO2").GetComponent<SpawnManager>();
         SMAsteroids = GameObject.Find("SpawnManagerAsteroids").GetComponent<SpawnManager>();
         ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.Name;
-        
+        MaxServerPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         AS = GetComponent<AudioSource>();
         isGameActive = false;
         AS.PlayOneShot(Theme);
@@ -49,9 +50,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if(isGameActive)
+        PlayerAmounText.text = "Players:\n" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        for (int i = 0; i < MaxServerPlayer; i++)
         {
-            ServerNameText.text = "Server: " + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+            Photon.Realtime.Player temp = PhotonNetwork.CurrentRoom.GetPlayer(i);         
+        }
+        
+        if(isGameActive)
+        {           
             if (!AS.isPlaying && !isGameOver)
             {
                 AS.PlayOneShot(Theme);

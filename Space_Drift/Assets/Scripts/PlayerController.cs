@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,12 +15,14 @@ public class PlayerController : MonoBehaviour
     private GameManager GM;
     private AudioSource AS;
     private Rigidbody2D Rb;
+    private PhotonView view;
     private bool isPressed = false;
     
     // Start is called before the first frame update
     void Start()
     {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        view = GetComponent<PhotonView>();
         Rb = GetComponent<Rigidbody2D>();
         AS = GetComponent<AudioSource>();
     }
@@ -27,19 +30,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isPressed)
+        if (view.IsMine)
         {
-            Rb.AddForce(Vector2.up * JumpForce * Time.deltaTime, ForceMode2D.Impulse);            
-        }
-
-        if(GM.isGameActive)
-        {
-            Rb.WakeUp();
-        }
-        else if (!GM.isGameActive)
-        {
-            Rb.Sleep();
-        }
+            if (isPressed)
+            {
+                Rb.AddForce(Vector2.up * JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+            }
+            if (GM.isGameActive)
+            {
+                Rb.WakeUp();
+            }
+            else if (!GM.isGameActive)
+            {
+                Rb.Sleep();
+            }
+        }       
     }
 
     public void Touch(BaseEventData x)

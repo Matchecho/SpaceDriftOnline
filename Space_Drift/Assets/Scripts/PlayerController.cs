@@ -69,56 +69,56 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       
-        switch (collision.gameObject.tag)
+        if (view.IsMine)
         {
-            case "Limit":                
-                GM.GameOver();
-                gameObject.SetActive(false);
-                break;
-            case "RedGem":
-                GM.Collect(1);
-                Destroy(collision.gameObject);
-                break;
-            case "OrgGem":
-                GM.Collect(2);
-                Destroy(collision.gameObject);
-                break;
-            case "YlwGem":
-                GM.Collect(5);
-                Destroy(collision.gameObject);
-                break;
-            case "GrnGem":
-                GM.Collect(8);
-                Destroy(collision.gameObject);
-                break;
-            case "BluGem":
-                GM.Collect(10);
-                Destroy(collision.gameObject);
-                break;
-            case "PrlGem":
-                GM.Collect(12);
-                Destroy(collision.gameObject);
-                break;
-            case "PnkGem":
-                GM.Collect(15);
-                Destroy(collision.gameObject);
-                break;
-            case "O2":
-                GM.AddOxygen();
-                Destroy(collision.gameObject);
-                break;
-            case "Asteroid":
-                GM.DepleteOxygen();
-                Destroy(collision.gameObject);
-                break;
-            case "Player":
-                
-                break;
-            default:
-                break;
-        }
-        
+            switch (collision.gameObject.tag)
+            {
+                case "Limit":
+                    GM.GameOver();
+                    gameObject.SetActive(false);
+                    break;
+                case "RedGem":
+                    GM.Collect(1);
+                    Destroy(collision.gameObject);
+                    break;
+                case "OrgGem":
+                    GM.Collect(2);
+                    Destroy(collision.gameObject);
+                    break;
+                case "YlwGem":
+                    GM.Collect(5);
+                    Destroy(collision.gameObject);
+                    break;
+                case "GrnGem":
+                    GM.Collect(8);
+                    Destroy(collision.gameObject);
+                    break;
+                case "BluGem":
+                    GM.Collect(10);
+                    Destroy(collision.gameObject);
+                    break;
+                case "PrlGem":
+                    GM.Collect(12);
+                    Destroy(collision.gameObject);
+                    break;
+                case "PnkGem":
+                    GM.Collect(15);
+                    Destroy(collision.gameObject);
+                    break;
+                case "O2":
+                    GM.AddOxygen();
+                    Destroy(collision.gameObject);
+                    break;
+                case "Asteroid":
+                    GM.DepleteOxygen();
+                    Destroy(collision.gameObject);
+                    break;
+                case "Player":
+                    break;
+                default:
+                    break;
+            }
 
+        }
     }
 }
